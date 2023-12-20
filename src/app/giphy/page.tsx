@@ -1,10 +1,9 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import axios from "axios";
 import { signOut } from "next-auth/react";
 import { redirect } from "next/navigation";
 import dotenv from "dotenv";
-
 type Gif = {
   id: string;
   url: string;
@@ -30,7 +29,6 @@ const GiphySearch: React.FC = () => {
           offset,
         },
       });
-      console.log(response.data);
       const newGifs: Gif[] = response.data.data.map((gif: any) => ({
         id: gif.id,
         url: gif.images.fixed_height.url,
@@ -85,6 +83,9 @@ const GiphySearch: React.FC = () => {
           width={85}
           alt="logo"
         />
+
+        {/* GIF Container Starts */}
+
         <div className="max-w-4xl w-full space-y-8 p-8 bg-gray-100 rounded-lg shadow-md">
           <div className="flex justify-between">
             <div className="relative flex-grow">
@@ -132,6 +133,7 @@ const GiphySearch: React.FC = () => {
             </button>
           </div>
         </div>
+        {/* GIF Container Ends */}
 
         <button
           className="text-white mt-4 bg-red-500 hover:bg-red-600 py-2 px-4 rounded-lg"
@@ -139,18 +141,6 @@ const GiphySearch: React.FC = () => {
         >
           Logout
         </button>
-        <footer>
-          <h5>
-            <b>
-              Designed & Maintained with{" "}
-              <span className="text-red-800">&#9825;</span> by{" "}
-              <a href="https://linktr.ee/i_m_k_s_s" target="_blank">
-                Sunny
-              </a>{" "}
-              &copy; 2023 All rights reserved
-            </b>
-          </h5>
-        </footer>
       </div>
     </>
   );

@@ -4,6 +4,9 @@ import { redirect } from "next/navigation";
 import GiphySearch from "./giphy/page";
 
 export default function Home() {
+
+  
+
   const session = useSession({
     required: true,
     onUnauthenticated() {
